@@ -1,0 +1,1 @@
+{"prompt": "The following is a list of {num_genes} gene names ordered by descending expression level in a {organism} cell.\nCell sentence: {cell_sentence}\nYour task is to identify the most likely cell type. Your response must include the answer in the following format: [Predicted_Cell_Type: ...]"}

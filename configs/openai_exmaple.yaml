@@ -1,0 +1,60 @@
+# ----------------------------- #
+#  OpenAI Provider Example Config #
+# ----------------------------- #
+provider: openai           # Registered name in infer/registry.py
+
+init_kwargs:               # Passed to OpenAIProvider.__init__()
+  # —— Required —— #
+  model_name: "Qwen/Qwen2.5-7B-Instruct"        # Can be switched to gpt-4o / gpt-4o-pro, etc.
+  api_key: ""          # Recommended: leave empty and use OPENAI_API_KEY env var.
+
+  # —— Common optional fields —— #
+  base_url: "https://api.siliconflow.cn/v1"    # Change this when using a proxy / reverse proxy.
+  organization: "org_123456"               # Set when required by team/organization accounts.
+  proxy: "http://127.0.0.1:7890"           # Global HTTP(S) proxy.
+  request_timeout: 60                      # Per-request timeout (seconds).
+  max_retries: 6                           # Auto-retry count for network / 5xx errors.
+
+  # —— Azure/OpenAI compatibility —— #
+  #   deployment_name: "gpt-4o-mini"       # Required for Azure.
+  #   api_version: "2025-06-01-preview"
+
+gen_kwargs:                # Passed through to client.chat.completions.create(...)
+  # —— Sampling parameters —— #
+  temperature: 0.7
+  top_p: 0.95
+  max_tokens: 2048
+  frequency_penalty: 0
+  presence_penalty: 0.3
+  seed: 20250701                     # Deterministic seed (supported in GPT-4o and later).
+  stream: false                      # Set to true for streaming output.
+
+  # —— system / default prompt —— #
+  # system_prompt: |
+  #   You are a helpful, concise assistant. Answer in Chinese unless asked otherwise.
+
+  # —— Stop words / stop tokens —— #
+  stop: ["<|eot_id|>"]
+
+  # —— Function/tool calling example (remove this block if unused) —— #
+  tools:
+    - type: function
+      function:
+        name: get_weather
+        description: Get current weather for a city
+        parameters:
+          type: object
+          properties:
+            location:
+              type: string
+              description: City name
+          required: [location]
+
+postprocess:               # (Optional) post-inference hooks; auto-called once supported by framework
+  strip_whitespace: true
+  remove_markdown: false
+
+logging:                   # Used by Provider to initialize logging.basicConfig(...)
+  level: "INFO"
+  save_log: true
+  log_path: "logs/openai_infer.log"

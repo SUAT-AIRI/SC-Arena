@@ -1,0 +1,35 @@
+# ------------------------ #
+#  vLLM Provider Example Config #
+# ------------------------ #
+
+provider: vllm          # "vllm" provider registered in infer/registry.py
+
+init_kwargs:
+  model_name: "/data/nfs/zhaojiahao/cache/hf/hub/qwen3"
+  tensor_parallel_size: 1
+  dtype: "bfloat16"
+  max_batch_size: 40960     
+  gpu_memory_utilization: 0.9
+  revision: "main"
+  trust_remote_code: true
+  load_format: "auto"
+
+  # LoRA / PEFT adapters
+  # lora_modules:
+  #   - "/data5/zhaojiahao/lora/qwen2_adapter"
+
+  # Quantization (if needed)
+  # quantization: "awq" # Optional: "awq" | "gptq" | "bnb4" | "fp8"
+
+
+gen_kwargs:            # Inference args passed to engine.infer(prompts, **gen_kwargs)
+  max_tokens: 1024
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 40
+  repetition_penalty: 1.05
+ 
+
+logging:               # Logging configuration
+  level: "INFO"
+  save_log: true

@@ -1,0 +1,22 @@
+provider: vllm_api             # Registered name in infer/registry.py
+
+init_kwargs:               # Passed to VllmProvider.__init__()
+  # —— Required —— #
+  model_name: "/data/nfs/zhaojiahao/cache/hf/hub/Qwen3-8B"       # Can be a HuggingFace model id or local path.
+  api_key: "EMPTY"                      # vLLM API server does not validate this by default.
+  host: "127.0.0.1"
+  port: 8000
+
+  
+  request_timeout: 60                    # Per-request timeout (seconds).
+  max_retries: 3                         # Auto-retry count for network / 5xx errors.
+
+gen_kwargs:                # Passed through to client.chat.completions.create(...)
+  # —— Sampling parameters —— #
+  temperature: 0.7
+  top_p: 0.95
+  max_tokens: 8000
+  frequency_penalty: 0
+  presence_penalty: 0.3
+  seed: 20250701                     # Deterministic seed (supported in GPT-4o and later).
+  stream: false                      # Set to true for streaming output.
