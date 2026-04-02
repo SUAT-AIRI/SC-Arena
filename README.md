@@ -1,4 +1,13 @@
-# SC-Arena
+﻿# SC-Arena: A Natural Language Benchmark for Single-Cell Reasoning with Knowledge-Augmented Evaluation
+
+[![arXiv](https://img.shields.io/badge/arXiv-2602.23199-b31b1b.svg?style=for-the-badge)](https://arxiv.org/abs/2602.23199)
+
+## News
+
+- **[February 2026]:** 🎉*SC-Arena* has been accepted to **ICLR 2026**!
+- **[February 2026]:** Preprint available on [arXiv](https://arxiv.org/abs/2602.23199).
+
+---
 
 SC-Arena is a task-oriented inference and evaluation framework for single-cell related benchmarks.
 It provides a unified runtime for model inference (via pluggable providers) and task evaluation
